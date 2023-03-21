@@ -15,6 +15,7 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,6 +25,7 @@ import javax.swing.JTextField;
 import api.MapInfo;
 import api.UserInfo;
 import api.UserMaps;
+import arrays.Gamemode;
 import arrays.Genres;
 import arrays.Languages;
 import javafx.application.Application;
@@ -59,6 +61,9 @@ import web.MapperPFP;
 		
 		public String id;
 		
+		
+		
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void main(String[] args) throws IOException {
 		
 		
@@ -88,14 +93,14 @@ import web.MapperPFP;
 	    info.setBackground(Color.LIGHT_GRAY);
 	    
 	    JLabel mapperinfolabel = new JLabel("Mapper Information");
-	    mapperinfolabel.setBounds(230, 1, 200, 30);
+	    mapperinfolabel.setBounds(230, 290, 200, 30);
 	    
 	    JLabel title = new JLabel();
-	    title.setBounds(10, 1, 100, 30);
+	    title.setBounds(10, 290, 100, 30);
 	    title.setText("Map Information");
 	    
 	    JLabel genrelabel = new JLabel("Genre: ");
-	    genrelabel.setBounds(10, 30, 250, 30);
+	    genrelabel.setBounds(10, 31, 250, 30);
 	    
 	    JLabel languagelabel = new JLabel("Language: ");
 	    languagelabel.setBounds(10, 50, 250, 30);
@@ -121,11 +126,16 @@ import web.MapperPFP;
 	    JLabel ratinglabeling = new JLabel("1                                                           10");
 	    ratinglabeling.setBounds(10, 140, 200, 30);
 	    
+	    JLabel gm = new JLabel("Gamemode: ");
+	    gm.setBounds(10, 11, 200, 30);
+	    
 	    Button browser = new Button("browser");
 	    browser.setBounds(343, 197, 50, 15);
 	    
 	    Button direct = new Button("direct");
 	    direct.setBounds(343, 212, 50, 15);
+	    
+	   
 	    
 	    MapInfo run = new MapInfo();
 	    
@@ -137,6 +147,7 @@ import web.MapperPFP;
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				
 				randomize.setLabel("loading...");
 				
@@ -186,6 +197,9 @@ import web.MapperPFP;
 						Languages languages = new Languages();
 						languages.addLanguages();
 						
+						Gamemode mode = new Gamemode();
+						mode.addList();
+						
 						mapperpfp.setIcon(pfp.getMapperPFP());
 						
 						
@@ -199,6 +213,8 @@ import web.MapperPFP;
 						try { playlabel.setText("Plays:                " + run.getPlays()); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { likelabel.setText("Likes:                " + run.getLikes()); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { rating.setValue(Math.round(Float.parseFloat(run.getRating()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
+						try { gm.setText("Gamemode:     " + mode.getGameMode().get(Integer.parseInt(run.getGameMode()))); } catch (NumberFormatException | IllegalStateException e1) { e1.printStackTrace(); } catch (IOException e1) { e1.printStackTrace();}
+							
 						
 						try { mapperlabel.setText(run.getMapper());	} catch (IllegalStateException | IOException e1) {e1.printStackTrace();}
 						try { ranklabel.setText("#" + user.getPlayerRank());	} catch (IllegalStateException | IOException e1) {e1.printStackTrace();}
@@ -293,25 +309,27 @@ import web.MapperPFP;
 		ratinglabel.setVisible(true);
 		ratinglabeling.setVisible(true);
 		browser.setVisible(true);
-		direct.setVisible(true);
+		direct.setVisible(true); 
+		gm.setVisible(true);
 		
 		gui.add(output);
 		gui.add(mapcard);
 		gui.add(mapname);
 		gui.add(browser);
 		gui.add(direct);
-		info.add(title);
+		gui.add(title);
+		gui.add(mapperinfolabel);
 		info.add(genrelabel);
 		info.add(languagelabel);
 		info.add(playlabel);
 		info.add(likelabel);
 		info.add(mapperpfp);
-		info.add(mapperinfolabel);
 		info.add(mapperlabel);
 		info.add(ranklabel);
 		info.add(rating);
 		info.add(ratinglabel);
 		info.add(ratinglabeling);
+		info.add(gm);
 		
 		gui.add(info);
 		
@@ -320,6 +338,7 @@ import web.MapperPFP;
 	    randomize.setVisible(true);
 	    gui.add(randomize);
 	    info.repaint();
+	   
 	    gui.repaint();
 		
 		}

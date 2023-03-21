@@ -45,6 +45,8 @@ public class MapInfo {
 	private String name;
 	private String artist;
 	private String mapperid;
+	private String mode;
+
 
 	private String id;
 	
@@ -80,12 +82,18 @@ public class MapInfo {
 				name = a.getJSONObject(i).getString("title");
 				artist = a.getJSONObject(i).getString("artist");
 				mapperid = a.getJSONObject(i).getString("creator_id");
+				mode = a.getJSONObject(i).getString("mode");
+				
+			
 				
 				int genreint = Integer.parseInt(genre) - 1;
 				genre = genreint + "";
 				
 				int langint = Integer.parseInt(language) - 1;
 				language = langint + "";
+				
+				int modeint = Integer.parseInt(mode) - 1;
+				mode = langint + "";
 				
 			
 
@@ -101,7 +109,7 @@ public class MapInfo {
 		
 		// API-Reader
 		id = info.getMapID();
-		String url = "https://osu.ppy.sh/api/get_beatmaps?s=" + id + "&k=" + apikey;
+		String url = "https://osu.ppy.sh/api/get_beatmaps?s=" + id + "&m=" + "0" + "&k=" + apikey;
 		URL apireq = new URL(url);
 		URLConnection con = apireq.openConnection();
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
@@ -114,8 +122,7 @@ public class MapInfo {
 	}
 
 	public String getAR() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return ar;
 			
@@ -123,39 +130,34 @@ public class MapInfo {
 	
 	public String getCS() throws IllegalStateException, IOException {
 
-		BeatmapInfo();
 		
 		return cs;
 		
 	}
 	
 	public String getSR() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return sr;
 		
 	}
 	
 	public String getMapper() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return mapper;
 		
 	}
 	
 	public String getDuration() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return length;
 		
 	}
 	
 	public String getBPM() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return bpm;
 		
@@ -163,91 +165,89 @@ public class MapInfo {
 	
 	public String getOD() throws IllegalStateException, IOException {
 
-		BeatmapInfo();
 		
 		return od;
 		
 	}
 	
 	public String getDiffCount() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return diffs;
 		
 	}
 	
 	public String getPlays() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return plays;
 		
 	}
 	
 	public String getLikes() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return likes;
 		
 	}
 	
 	public String getGenre() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return genre;
 		
 	}
 	
 	public String getLanguage() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return language;
 		
 	}
 	
 	public String getRating() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return rating;
 		
 	}
 	
 	public String getUploadDate() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return uploaddate;
 		
 	}
 	
 	public String getName() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return name;
 		
 	}
 	
 	public String getArtist() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+
 		
 		return artist;
 		
 	}
 	
-public String getMapperID() throws IllegalStateException, IOException {
-		
-		BeatmapInfo();
+	public String getMapperID() throws IllegalStateException, IOException {
+
 		
 		return mapperid;
 		
 	}
+	
+	public String getGameMode() throws IllegalStateException, IOException {
+
+		
+		return mode;
+		
+	}
+	
+	
 	
 	
 	
