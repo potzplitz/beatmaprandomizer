@@ -2,10 +2,15 @@ package main;
 
 import java.awt.Button;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
@@ -21,6 +26,7 @@ import api.UserInfo;
 import api.UserMaps;
 import arrays.Genres;
 import arrays.Languages;
+import javafx.application.Application;
 import randomizer.IDRandomizer;
 import web.MapBanner;
 import web.MapperPFP;
@@ -115,9 +121,15 @@ import web.MapperPFP;
 	    JLabel ratinglabeling = new JLabel("1                                                           10");
 	    ratinglabeling.setBounds(10, 140, 200, 30);
 	    
+	    Button browser = new Button("browser");
+	    browser.setBounds(343, 197, 50, 15);
 	    
+	    Button direct = new Button("direct");
+	    direct.setBounds(343, 212, 50, 15);
 	    
+	    MapInfo run = new MapInfo();
 	    
+	    Desktop desktop = Desktop.getDesktop();
 	  
 		Button randomize = new Button("randomize");
 	    randomize.setBounds(187, 240, 100, 30);
@@ -126,21 +138,32 @@ import web.MapperPFP;
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				randomize.setLabel("loading...");
 				
-				IDRandomizer randomize = new IDRandomizer();
+				IDRandomizer randomizer = new IDRandomizer();
 				
-				randomize.Random();
+				randomizer.Random();
 				
-				MapInfo run = new MapInfo();
+				
 				UserInfo user = new UserInfo();
 				UserMaps maps = new UserMaps();
 				
 				
 				
-				try {user.PlayerInfo();} catch (IOException e5) {e5.printStackTrace();}
-				try {run.BeatmapInfo();} catch (IllegalStateException | IOException e4) {e4.printStackTrace();}
-			//	try {maps.getUserMaps();} catch (IllegalStateException | IOException e4) {e4.printStackTrace();} catch (InterruptedException e1) {e1.printStackTrace();}
 				
+				
+				try {run.getApi();} catch (IOException e5) {e5.printStackTrace();  } 
+				randomize.setLabel("loading...");
+				randomize.setLabel("error");
+				try {user.PlayerInfo();} catch (IOException e5) {e5.printStackTrace();}
+				
+				
+				
+				randomize.setLabel("loading...");
+				randomize.setLabel("error");
+				try {run.BeatmapInfo();} catch (IllegalStateException | IOException e4) {e4.printStackTrace();}
+				randomize.setLabel("loading...");
+		
 				String mapid = run.getMapID();
 
 				MapBanner banner = new MapBanner();
@@ -155,6 +178,8 @@ import web.MapperPFP;
 						MapperPFP pfp = new MapperPFP();
 						try {pfp.addPFP();} catch (IOException e2) {e2.printStackTrace();}
 						
+						
+						
 						Genres genres = new Genres();
 						genres.addList();
 						
@@ -162,9 +187,14 @@ import web.MapperPFP;
 						languages.addLanguages();
 						
 						mapperpfp.setIcon(pfp.getMapperPFP());
+						
+						
+						
+						
 						 
 						
-						try { genrelabel.setText("Genre:                " + genres.genres.get(Integer.parseInt(run.getGenre()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
+						
+						try { genrelabel.setText("Genre:               " + genres.genres.get(Integer.parseInt(run.getGenre()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { languagelabel.setText("Language:        " + languages.languages.get(Integer.parseInt(run.getLanguage()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { playlabel.setText("Plays:                " + run.getPlays()); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { likelabel.setText("Likes:                " + run.getLikes()); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
@@ -174,17 +204,76 @@ import web.MapperPFP;
 						try { ranklabel.setText("#" + user.getPlayerRank());	} catch (IllegalStateException | IOException e1) {e1.printStackTrace();}
 						
 						
+						
+						
+								
+						
+						randomize.setLabel("Randomize");
+						
 						gui.repaint();
 						mapname.repaint();
 					
-						
+					
 					
 						gui.repaint();
+						
+					
+						
 			}
 	    	
 	    	
 	    });
 	    
+	    browser.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI("https://osu.ppy.sh/beatmapsets/" + run.getMapID()));
+				} catch (IOException | URISyntaxException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+	    
+	    direct.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					Desktop.getDesktop().browse(new URI("osu://b/4045797/" + run.getMapID()));
+				} catch (IOException | URISyntaxException e1) {
+					
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+	    
+	    
+	    mapperpfp.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {desktop.browse(URI.create("https://osu.ppy.sh/users/" + run.getMapperID()));} catch (IOException e1) {e1.printStackTrace();}		
+			}
+			@Override
+			public void mousePressed(MouseEvent e) {		
+			}
+			@Override
+			public void mouseReleased(MouseEvent e) {		
+			}
+			@Override
+			public void mouseEntered(MouseEvent e) {	
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+			}
+		});
 	    
 	    
 	    mapcard.setBounds(40, 50, 400, 140);
@@ -203,10 +292,14 @@ import web.MapperPFP;
 		rating.setVisible(true);
 		ratinglabel.setVisible(true);
 		ratinglabeling.setVisible(true);
+		browser.setVisible(true);
+		direct.setVisible(true);
 		
 		gui.add(output);
 		gui.add(mapcard);
 		gui.add(mapname);
+		gui.add(browser);
+		gui.add(direct);
 		info.add(title);
 		info.add(genrelabel);
 		info.add(languagelabel);

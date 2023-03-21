@@ -3,7 +3,6 @@ package api;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -49,28 +48,17 @@ public class MapInfo {
 
 	private String id;
 	
+	private static String arrin;
 	
 	
 	@SuppressWarnings("unused")
 	public void BeatmapInfo() throws IllegalStateException, IOException{
 		
-		MapInfo info = new MapInfo();
 		
-		// API-Key
-		String apikey = "3c29279d7f702fdd1094900daa128d898812b8d8";
-		
-		
-		// API-Reader
-		id = info.getMapID();
-		String url = "https://osu.ppy.sh/api/get_beatmaps?s=" + id + "&k=" + apikey;
-		URL apireq = new URL(url);
-		URLConnection con = apireq.openConnection();
-		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-		String inputLine = in.readLine();
-		String arrin = inputLine + "";
 		JSONArray a = new JSONArray(arrin);
-
-			
+	
+		
+		
 				// JSON-Reader
 				int i = 0;
 	
@@ -100,6 +88,28 @@ public class MapInfo {
 				language = langint + "";
 				
 			
+
+	}
+	
+	
+	public void getApi() throws IOException {
+		MapInfo info = new MapInfo();
+		
+		// API-Key
+		String apikey = "3c29279d7f702fdd1094900daa128d898812b8d8";
+		
+		
+		// API-Reader
+		id = info.getMapID();
+		String url = "https://osu.ppy.sh/api/get_beatmaps?s=" + id + "&k=" + apikey;
+		URL apireq = new URL(url);
+		URLConnection con = apireq.openConnection();
+		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+		String inputLine = in.readLine();
+		arrin = inputLine + "";
+		
+		System.out.println("api request with link: " + url);
+		
 
 	}
 
