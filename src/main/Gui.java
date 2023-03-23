@@ -8,14 +8,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +23,6 @@ import api.UserMaps;
 import arrays.Gamemode;
 import arrays.Genres;
 import arrays.Languages;
-import javafx.application.Application;
 import randomizer.IDRandomizer;
 import web.MapBanner;
 import web.MapperPFP;
@@ -158,18 +152,12 @@ import web.MapperPFP;
 				
 				UserInfo user = new UserInfo();
 				UserMaps maps = new UserMaps();
-				
-				
-				
-				
-				
+
 				try {run.getApi();} catch (IOException e5) {e5.printStackTrace();  } 
 				randomize.setLabel("loading...");
 				randomize.setLabel("error");
 				try {user.PlayerInfo();} catch (IOException e5) {e5.printStackTrace();}
-				
-				
-				
+		
 				randomize.setLabel("loading...");
 				randomize.setLabel("error");
 				try {run.BeatmapInfo();} catch (IllegalStateException | IOException e4) {e4.printStackTrace();}
@@ -188,9 +176,7 @@ import web.MapperPFP;
 						
 						MapperPFP pfp = new MapperPFP();
 						try {pfp.addPFP();} catch (IOException e2) {e2.printStackTrace();}
-						
-						
-						
+
 						Genres genres = new Genres();
 						genres.addList();
 						
@@ -201,13 +187,7 @@ import web.MapperPFP;
 						mode.addList();
 						
 						mapperpfp.setIcon(pfp.getMapperPFP());
-						
-						
-						
-						
-						 
-						
-						
+	
 						try { genrelabel.setText("Genre:               " + genres.genres.get(Integer.parseInt(run.getGenre()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { languagelabel.setText("Language:        " + languages.languages.get(Integer.parseInt(run.getLanguage()))); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
 						try { playlabel.setText("Plays:                " + run.getPlays()); } catch (NumberFormatException | IllegalStateException | IOException e1) { e1.printStackTrace(); }
@@ -218,12 +198,7 @@ import web.MapperPFP;
 						
 						try { mapperlabel.setText(run.getMapper());	} catch (IllegalStateException | IOException e1) {e1.printStackTrace();}
 						try { ranklabel.setText("#" + user.getPlayerRank());	} catch (IllegalStateException | IOException e1) {e1.printStackTrace();}
-						
-						
-						
-						
-								
-						
+	
 						randomize.setLabel("Randomize");
 						
 						gui.repaint();
@@ -232,9 +207,7 @@ import web.MapperPFP;
 					
 					
 						gui.repaint();
-						
-					
-						
+				
 			}
 	    	
 	    	
@@ -261,7 +234,7 @@ import web.MapperPFP;
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					Desktop.getDesktop().browse(new URI("osu://b/4045797/" + run.getMapID()));
+					Desktop.getDesktop().browse(new URI("osu://b/" + run.getMapID()));
 				} catch (IOException | URISyntaxException e1) {
 					
 					e1.printStackTrace();

@@ -18,9 +18,6 @@ public class MapBanner {
 		String link = "https://assets.ppy.sh/beatmaps/" + info.getMapID() + "/covers/card.jpg";
 		URL url = new URL(link);
 		mapbanner.setImage(ImageIO.read(url));
-		
-		
-		
 	}
 	
 	public ImageIcon getBannerImage() {

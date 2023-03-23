@@ -10,16 +10,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-
-import com.oopsjpeg.osu4j.OsuBeatmap;
-import com.oopsjpeg.osu4j.OsuBeatmapSet;
-import com.oopsjpeg.osu4j.backend.EndpointBeatmapSet;
-import com.oopsjpeg.osu4j.backend.EndpointBeatmapSet.Arguments;
-import com.oopsjpeg.osu4j.backend.EndpointBeatmaps;
-import com.oopsjpeg.osu4j.backend.Osu;
-import com.oopsjpeg.osu4j.exception.OsuAPIException;
-
 import randomizer.IDRandomizer;
+
 
 @SuppressWarnings("unused")
 public class MapInfo {
@@ -54,13 +46,8 @@ public class MapInfo {
 	
 	
 	@SuppressWarnings("unused")
-	public void BeatmapInfo() throws IllegalStateException, IOException{
-		
-		
+	public void BeatmapInfo() throws IllegalStateException, IOException{	
 		JSONArray a = new JSONArray(arrin);
-	
-		
-		
 				// JSON-Reader
 				int i = 0;
 	
@@ -84,8 +71,6 @@ public class MapInfo {
 				mapperid = a.getJSONObject(i).getString("creator_id");
 				mode = a.getJSONObject(i).getString("mode");
 				
-			
-				
 				int genreint = Integer.parseInt(genre) - 1;
 				genre = genreint + "";
 				
@@ -94,11 +79,7 @@ public class MapInfo {
 				
 				int modeint = Integer.parseInt(mode) - 1;
 				mode = langint + "";
-				
-			
-
 	}
-	
 	
 	public void getApi() throws IOException {
 		MapInfo info = new MapInfo();
@@ -115,155 +96,68 @@ public class MapInfo {
 		BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine = in.readLine();
 		arrin = inputLine + "";
-		
 		System.out.println("api request with link: " + url);
-		
-
 	}
 
 	public String getAR() throws IllegalStateException, IOException {
-
-		
-		return ar;
-			
+		return ar;		
 	}
-	
-	public String getCS() throws IllegalStateException, IOException {
-
-		
-		return cs;
-		
+	public String getCS() throws IllegalStateException, IOException {	
+		return cs;	
 	}
-	
-	public String getSR() throws IllegalStateException, IOException {
-
-		
-		return sr;
-		
+	public String getSR() throws IllegalStateException, IOException {	
+		return sr;	
 	}
-	
-	public String getMapper() throws IllegalStateException, IOException {
-
-		
-		return mapper;
-		
+	public String getMapper() throws IllegalStateException, IOException {		
+		return mapper;		
 	}
-	
-	public String getDuration() throws IllegalStateException, IOException {
-
-		
-		return length;
-		
+	public String getDuration() throws IllegalStateException, IOException {	
+		return length;	
 	}
-	
-	public String getBPM() throws IllegalStateException, IOException {
-
-		
-		return bpm;
-		
+	public String getBPM() throws IllegalStateException, IOException {	
+		return bpm;	
 	}
-	
-	public String getOD() throws IllegalStateException, IOException {
-
-		
+	public String getOD() throws IllegalStateException, IOException {	
 		return od;
-		
 	}
-	
-	public String getDiffCount() throws IllegalStateException, IOException {
-
-		
-		return diffs;
-		
+	public String getDiffCount() throws IllegalStateException, IOException {	
+		return diffs;		
 	}
-	
-	public String getPlays() throws IllegalStateException, IOException {
-
-		
-		return plays;
-		
+	public String getPlays() throws IllegalStateException, IOException {	
+		return plays;	
 	}
-	
-	public String getLikes() throws IllegalStateException, IOException {
-
-		
-		return likes;
-		
+	public String getLikes() throws IllegalStateException, IOException {	
+		return likes;	
 	}
-	
-	public String getGenre() throws IllegalStateException, IOException {
-
-		
-		return genre;
-		
+	public String getGenre() throws IllegalStateException, IOException {	
+		return genre;	
 	}
-	
-	public String getLanguage() throws IllegalStateException, IOException {
-
-		
-		return language;
-		
+	public String getLanguage() throws IllegalStateException, IOException {	
+		return language;	
 	}
-	
-	public String getRating() throws IllegalStateException, IOException {
-
-		
-		return rating;
-		
+	public String getRating() throws IllegalStateException, IOException {	
+		return rating;	
 	}
-	
-	public String getUploadDate() throws IllegalStateException, IOException {
-
-		
-		return uploaddate;
-		
+	public String getUploadDate() throws IllegalStateException, IOException {	
+		return uploaddate;	
 	}
-	
-	public String getName() throws IllegalStateException, IOException {
-
-		
-		return name;
-		
+	public String getName() throws IllegalStateException, IOException {	
+		return name;	
 	}
-	
 	public String getArtist() throws IllegalStateException, IOException {
-
-		
-		return artist;
-		
+		return artist;	
 	}
-	
-	public String getMapperID() throws IllegalStateException, IOException {
-
-		
-		return mapperid;
-		
+	public String getMapperID() throws IllegalStateException, IOException {	
+		return mapperid;	
 	}
-	
-	public String getGameMode() throws IllegalStateException, IOException {
-
-		
-		return mode;
-		
+	public String getGameMode() throws IllegalStateException, IOException {	
+		return mode;	
 	}
-	
-	
-	
-	
 	
 	public String getMapID() {
-		
-		
 		IDRandomizer id = new IDRandomizer();
 		
 		String temp = id.getRandom();
 		return temp;
-		
-		
-		
-		
 	}
-	
-	
-
 }
