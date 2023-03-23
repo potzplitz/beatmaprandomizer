@@ -23,7 +23,7 @@ public class UserInfo {
 		id = info.getMapperID();
 		
 		// API-Key
-		String apikey = "3c29279d7f702fdd1094900daa128d898812b8d8";
+		String apikey = "no";
 		
 		
 		// API-Reader
