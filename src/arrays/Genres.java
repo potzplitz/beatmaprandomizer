@@ -1,6 +1,11 @@
 package arrays;
 
+import java.io.BufferedReader;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JFrame;
+
 
 public class Genres {
 	
@@ -25,6 +30,14 @@ public class Genres {
 
 		
 	}
+	
+	
+	public void getdata(int i) {
+		
+		System.out.println(genres.get(i));
+		
+	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	public ArrayList getGenres() {

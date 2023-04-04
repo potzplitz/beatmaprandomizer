@@ -79,6 +79,8 @@ public class MapInfo {
 				
 				int modeint = Integer.parseInt(mode) - 1;
 				mode = langint + "";
+				
+				System.out.println("action");
 	}
 	
 	public void getApi() throws IOException {
